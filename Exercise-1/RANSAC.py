@@ -4,9 +4,13 @@ import pcl
 # Load Point Cloud file
 cloud = pcl.load_XYZRGB('tabletop.pcd')
 
-
 # Voxel Grid filter
-
+vox = cloud.make_voxel_grid_filter()
+leaf_size = 0.01
+vox.set_leaf_size(leaf_size, leaf_size, leaf_size)
+cloud_filtered = vox.filter()
+filename = 'voxel_downsampled.pcd'
+pcl.save(cloud_filtered, filename)
 
 # PassThrough filter
 
@@ -24,5 +28,3 @@ cloud = pcl.load_XYZRGB('tabletop.pcd')
 
 
 # Save pcd for tabletop objects
-
-
